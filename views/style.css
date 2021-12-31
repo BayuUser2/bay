@@ -1,0 +1,344 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
+@media only screen and (max-width: 380px) and (orientation: portrait) {
+  html {
+    font-size: 13px;
+	}
+}
+
+@media only screen and (max-width: 670px) and (orientation: landscape) {
+  html {
+    font-size: 13px;
+  }
+}
+
+@media only screen and (max-width: 320px) and (orientation: portrait) {
+  html {
+    font-size: 11px;
+  }
+}
+
+@media only screen and (max-width: 480px) and (orientation: landscape) {
+  html {
+    font-size: 11px;
+  }
+}
+
+* {
+  font-family: 'Roboto Mono', monospace;
+}
+
+body {
+  background-color: #22313F;
+  color: #6bccef;
+}
+
+.navbar {
+  background-color: #2C3E50;
+}
+
+.navbar .navbar-text {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .navbar-text a {
+  color: #6bccef;
+}
+
+.navbar .navbar-text:hover a {
+  color: #6bccef;
+}
+
+.game {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.tictactoe {
+  position: relative;
+}
+
+.tictactoe__thinker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 50ms ease-in-out;
+  background-color: rgba(34, 49, 63, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.tictactoe__thinker.think {
+  opacity: 1;
+  pointer-events: initial;
+}
+
+.tictactoe__thinker.think::after {
+  -webkit-animation: thinker 750ms linear infinite;
+          animation: thinker 750ms linear infinite;
+  font-family: "FontAwesome";
+  content: "\f0eb";
+  font-size: 4rem;
+  opacity: 0;
+}
+
+.tictactoe__menu {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 1000ms ease-in-out;
+  background-color: rgba(34, 49, 63, 0.95);
+  pointer-events: none;
+  padding: 2rem;
+  border: .125rem solid;
+}
+
+.tictactoe__menu.active {
+  opacity: 1;
+  pointer-events: initial;
+}
+
+.tictactoe__menu .form-group {
+  flex-basis: 100%;
+}
+
+.tictactoe__blackboard {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1000ms ease-in-out;
+  background-color: rgba(34, 49, 63, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 3;
+  pointer-events: none;
+  text-align: center;
+  padding: .5rem;
+  border: .125rem solid;
+}
+
+.tictactoe__blackboard.active {
+  opacity: 1;
+  pointer-events: initial;
+}
+
+.blackboard__message {
+  margin-bottom: .5rem;
+}
+
+.blackboard__score {
+  margin-bottom: .5rem;
+}
+
+.panel {
+  position: absolute;
+	top: 0;
+	z-index: 1;
+  width: 100%;
+  height: 3.125rem;
+  padding: .5rem;
+  background-color: #2C3E50;
+
+  display: flex;
+  align-items: center;
+
+  transition: left 250ms ease-in-out, right 250ms ease-in-out;
+}
+
+.panel.panel--left {
+  left: 3.125rem;
+  transform-origin: top left;
+  transform: rotate(90deg);
+}
+
+.panel.panel--left.active {
+  left: 0;
+}
+
+.panel.panel--right {
+  left: 100%;
+  transform-origin: top left;
+  transform: rotate(90deg);
+}
+
+.panel.panel--right.active {
+  left: calc(100% + 3.125rem);
+}
+
+.panel.panel--left > .panel__gamertag {
+  transform: rotate(-180deg);
+}
+
+.panel.panel--right > .panel__gamertag {
+  text-align: right;
+}
+
+.panel > .panel__gamertag {
+  flex: 1;
+  padding: 0 .5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.panel > .panel__symbol {
+  transform: rotate(-90deg);
+}
+
+.tictactoe__cells {
+	z-index: 2;
+  height: 100%;
+  display: grid;
+  grid-template: repeat(3, 100px) / repeat(3, 100px);
+  grid-gap: .25rem;
+  background-color: #525e64;
+  padding: .25rem;
+  position: relative;
+}
+
+@media only screen and (max-width: 400px) and (orientation: portrait) {
+	.tictactoe__cells {
+    grid-template: repeat(3, 90px) / repeat(3, 90px);
+  }
+}
+
+
+@media only screen and (max-height: 400px) and (orientation: landscape) {
+	.tictactoe__cells {
+    grid-template: repeat(3, 90px) / repeat(3, 90px);
+  }
+}
+
+@media only screen and (max-width: 380px) and (orientation: portrait) {
+	.tictactoe__cells {
+    grid-template: repeat(3, 80px) / repeat(3, 80px);
+  }
+}
+
+@media only screen and (max-height: 380px) and (orientation: landscape) {
+	.tictactoe__cells {
+    grid-template: repeat(3, 80px) / repeat(3, 80px);
+  }
+}
+
+@media only screen and (max-width: 340px) and (orientation: portrait) {
+	.tictactoe__cells {
+    grid-template: repeat(3, 70px) / repeat(3, 70px);
+  }
+}
+
+@media only screen and (max-height: 340px) and (orientation: landscape) {
+	.tictactoe__cells {
+    grid-template: repeat(3, 70px) / repeat(3, 70px);
+  }
+}
+
+.form-group label {
+  display: block;
+}
+
+.form-control, .form-control:focus {
+  color: #6bccef;
+  background-color: #22313F;
+  border: .125rem solid #6bccef;
+  border-right: 0;
+  box-shadow: none;
+}
+.input-group-addon {
+  color: #6bccef;
+  background-color: #22313F;
+  border: .125rem solid #6bccef;
+  border-left: 0;
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #22313F;
+  transition: background-color 1000ms ease-in-out, color 1000ms ease-in-out;
+
+  cursor: pointer;
+}
+
+.cell > i {
+  font-size: 5rem;
+}
+
+.cell.active {
+  background-color: #6bccef;
+  color: #22313F;
+}
+
+.cell:empty {
+  transition: background-color 250ms ease-in-out;
+}
+
+.cell:empty:hover {
+  background-color: #2C3E50;
+}
+
+footer {
+  background-color: #22313F;
+  padding: .25rem;
+}
+
+.btn-group .btn:not(:last-child) {
+  border-right: 0;
+}
+
+.btn-custom.active, .btn-custom:active, .btn-custom:hover {
+  color: #22313F;
+  background-color: #6bccef;
+}
+
+.btn-custom {
+  color: #6bccef;
+  background-color: #22313F;
+  border: .125rem solid #6bccef;
+}
+
+.input-group-btn .btn-custom {
+  border-width: .125rem;
+}
+
+@-webkit-keyframes thinker {
+  0% {opacity: 0}
+  25% {opacity: 0.5}
+  50% {opacity: 1}
+  75% {opacity: 0.5}
+  100% {opacity: 0}
+}
+
+@keyframes thinker {
+  0% {opacity: 0}
+  25% {opacity: 0.5}
+  50% {opacity: 1}
+  75% {opacity: 0.5}
+  100% {opacity: 0}
+};
